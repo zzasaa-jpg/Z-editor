@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import logo from './logo.png'
 
 function App() {
   let [html, setHtml] = useState('');
   let [css, setCss] = useState('');
-  let [js, SetJS] = useState('');
+  let [js, setJS] = useState('');
   let [hover, setHover] = useState(false);
   let [hover2, setHover2] = useState(false);
   let [hover3, setHover3] = useState(false);
@@ -14,19 +14,42 @@ function App() {
   let handlechage = (e) => {
     let value = e.target.value;
     setHtml(value);
+    localStorage.setItem('Html_value', value)
     changing(value, css, js);
   }
+  useEffect(()=>{
+    let still_val = localStorage.getItem('Html_value')
+    if (still_val){
+      setHtml(still_val)
+    }
+  },[])
   let handlechagecss = (e) => {
     let value = e.target.value;
     setCss(value);
+    localStorage.setItem('Css_value', value)
     changing(html, value, js);
   }
 
+  useEffect(()=>{
+    let still_val = localStorage.getItem('Css_value')
+    if (still_val){
+      setCss(still_val)
+    }
+  },[])
+
   let handleJS = (e) => {
     let value = e.target.value;
-    SetJS(value);
+    setJS(value);
+    localStorage.setItem('Js_value', value)
     changing(html, css, value);
   }
+  
+  useEffect(()=>{
+    let still_val = localStorage.getItem('Js_value')
+    if (still_val){
+      setJS(still_val)
+    }
+  },[])
 
   let hadleTextArea = (index, value) => {
     if (index === 0) {
@@ -40,7 +63,7 @@ function App() {
       changing(html, value, js);
     }
     else if (index === 2) {
-      SetJS(value);
+      setJS(value);
       setHover3(true);
       changing(html, css, value);
     }
@@ -97,6 +120,7 @@ function App() {
           }
         </button>
       </nav>
+
       <div className="dark:bg-black flex-col lg:flex lg:flex-row  h-screen font-kedo-mono">
         <div className='w-auto lg:w-[40%] flex flex-col gap-2 bg-slate-700 p-2'>
 
@@ -112,12 +136,11 @@ function App() {
         </div>
 
         <div className='flex flex-col w-auto lg:w-[60%] '>
-          <h1 className='bg-slate-700 text-left text-white font-semibold'>OutPut</h1>
-          <iframe className={dark ? 'bg-black h-screen transition-all duration-500' : 'bg-white h-screen transition-all duration-500'} id='lop' title='editor'>
-          </iframe>
-
+            <h1 className='bg-slate-700 text-left text-white font-semibold'>OutPut</h1>
+            <iframe className={dark ? 'bg-black h-screen transition-all duration-500' : 'bg-white h-screen transition-all duration-500'} id='lop' title='editor'>
+            </iframe>
+            
         </div>
-
       </div>
     </>
   );
