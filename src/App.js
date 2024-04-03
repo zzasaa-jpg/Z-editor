@@ -106,10 +106,9 @@ function App() {
     setDark(!dark);
   }
 
-
   return (
     <>
-      <nav className='flex justify-between items-center p-1 bg-slate-700'>
+      <nav className='flex justify-between items-center p-2 bg-slate-700'>
         <img src={logo} alt="logo" width={50} className='border border-white rounded-[8px]' />
         <button onClick={handleDarkMode} className='border border-white text-white text-[20px] flex p-1 rounded-[8px]'>
           {
@@ -120,6 +119,7 @@ function App() {
           }
         </button>
       </nav>
+      <hr className='bg-white' />
 
       <div className="dark:bg-black flex-col lg:flex lg:flex-row  h-screen font-kedo-mono">
         <div className='w-auto lg:w-[40%] flex flex-col gap-2 bg-slate-700 p-2'>
